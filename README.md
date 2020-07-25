@@ -7,10 +7,10 @@ Using System.Threading.Channels
 > Multiple examples are implemented :
 >
 > **(1)** Example1 : based on hardcoded implementation of channel concept
->> Weak consumer using `Read` method -> may return inexistants items (0 value)
+>> Weak consumer using `Read` method -> may consume inexistants items (0 value)
 >
 > **(2)** Example2 : based on hardcoded implementation of channel concept
->> Enhanced consumer using `TryRead` method -> return always existants items
+>> Enhanced consumer using `TryRead` method -> consume always existants items
 >
 > **(3)** Example3 : based on channel built-in implementation (unbounded)
 >> Consumer using `WaitToReadAsync` method
