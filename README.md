@@ -1,3 +1,4 @@
+![.NET Core](https://github.com/aimenux/ChannelsDemo/workflows/.NET%20Core/badge.svg)
 # ChannelsDemo
 ```
 Using System.Threading.Channels
