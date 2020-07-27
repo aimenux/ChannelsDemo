@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace App.Examples
 {
-    public class Example4 : IExample
+    public class Example4 : AbstractExample
     {
         private readonly IOptionsSnapshot<Settings> _options;
 
@@ -14,23 +14,24 @@ namespace App.Examples
             _options = options;
         }
 
-        public string Description => "Built-in unbounded channel (using ReadAllAsync)";
+        public override string Description => "Built-in unbounded channel (using ReadAllAsync)";
 
-        public Task RunAsync()
+        public override Task RunAsync()
         {
-            var channel = Channel.CreateUnbounded<int>();
+            var channel = Channel.CreateUnbounded<string>();
             var producer = Producer(channel);
             var consumer = Consumer(channel);
             return Task.WhenAll(producer, consumer);
         }
 
-        private async Task Producer(ChannelWriter<int> writer)
+        private async Task Producer(ChannelWriter<string> writer)
         {
             var delay = _options.Value.ProducerDelay;
             var nbrItems = _options.Value.ItemsNumber;
 
-            for(var item = 1; item <= nbrItems; item++)
+            for(var index = 1; index <= nbrItems; index++)
             {
+                var item = $"{index}-{GenerateRandomString()}";
                 await writer.WriteAsync(item);
                 ConsoleColor.Green.WriteLine($"Item produced: {item}");
                 await Task.Delay(delay);
@@ -39,7 +40,7 @@ namespace App.Examples
             writer.Complete();
         }
 
-        private async Task Consumer(ChannelReader<int> reader)
+        private async Task Consumer(ChannelReader<string> reader)
         {
             var delay = _options.Value.ConsumerDelay;
             await foreach (var item in reader.ReadAllAsync())

@@ -5,20 +5,21 @@ using Microsoft.Extensions.Options;
 
 namespace App.Examples
 {
-    public class Example3 : AbstractExample
+    public class Example6 : AbstractExample
     {
         private readonly IOptionsSnapshot<Settings> _options;
 
-        public Example3(IOptionsSnapshot<Settings> options)
+        public Example6(IOptionsSnapshot<Settings> options)
         {
             _options = options;
         }
 
-        public override string Description => "Built-in unbounded channel (using WaitToReadAsync)";
+        public override string Description => "Built-in bounded channel (using ReadAllAsync)";
 
         public override Task RunAsync()
         {
-            var channel = Channel.CreateUnbounded<string>();
+            var size = _options.Value.BoundedChannelSize;
+            var channel = Channel.CreateBounded<string>(size);
             var producer = Producer(channel);
             var consumer = Consumer(channel);
             return Task.WhenAll(producer, consumer);
@@ -43,13 +44,10 @@ namespace App.Examples
         private async Task Consumer(ChannelReader<string> reader)
         {
             var delay = _options.Value.ConsumerDelay;
-            while (await reader.WaitToReadAsync())
+            await foreach (var item in reader.ReadAllAsync())
             {
-                while (reader.TryRead(out var item))
-                {
-                    ConsoleColor.Blue.WriteLine($"Item consumed: {item}");
-                    await Task.Delay(delay);
-                }
+                ConsoleColor.Blue.WriteLine($"Item consumed: {item}");
+                await Task.Delay(delay);
             }
         }
     }

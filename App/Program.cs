@@ -24,11 +24,12 @@ namespace App
                 .Build();
 
             var services = new ServiceCollection();
-            services.AddTransient<IExample, Example1>();
-            services.AddTransient<IExample, Example2>();
-            services.AddTransient<IExample, Example3>();
+            //services.AddTransient<IExample, Example1>();
+            //services.AddTransient<IExample, Example2>();
+            //services.AddTransient<IExample, Example3>();
             services.AddTransient<IExample, Example4>();
-            services.AddTransient<IExample, Example5>();
+            //services.AddTransient<IExample, Example5>();
+            //services.AddTransient<IExample, Example6>();
 
             services.Configure<Settings>(configuration.GetSection(nameof(Settings)));
 
