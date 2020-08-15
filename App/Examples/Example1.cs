@@ -32,7 +32,7 @@ namespace App.Examples
             {
                 var item = $"{index}-{GenerateRandomString()}";
                 writer.Write(item);
-                ConsoleColor.Green.WriteLine($"Item produced: {index}");
+                ConsoleColor.Green.WriteLine($"Item produced: {item}");
                 await Task.Delay(delay);
             }
 

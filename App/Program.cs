@@ -24,12 +24,12 @@ namespace App
                 .Build();
 
             var services = new ServiceCollection();
-            //services.AddTransient<IExample, Example1>();
-            //services.AddTransient<IExample, Example2>();
-            //services.AddTransient<IExample, Example3>();
+            services.AddTransient<IExample, Example1>();
+            services.AddTransient<IExample, Example2>();
+            services.AddTransient<IExample, Example3>();
             services.AddTransient<IExample, Example4>();
-            //services.AddTransient<IExample, Example5>();
-            //services.AddTransient<IExample, Example6>();
+            services.AddTransient<IExample, Example5>();
+            services.AddTransient<IExample, Example6>();
 
             services.Configure<Settings>(configuration.GetSection(nameof(Settings)));
 
@@ -45,7 +45,7 @@ namespace App
             Console.WriteLine($"- Bounded channel size = {settings.BoundedChannelSize}");
             Console.WriteLine();
 
-            foreach (var example in serviceProvider.GetServices<IExample>())
+            foreach (var example in examples)
             {
                 var sw = new Stopwatch();
                 sw.Start();
