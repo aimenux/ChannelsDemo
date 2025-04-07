@@ -1,4 +1,4 @@
-![.NET Core](https://github.com/aimenux/ChannelsDemo/workflows/.NET%20Core/badge.svg)
+[![.NET](https://github.com/aimenux/ChannelsDemo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/aimenux/ChannelsDemo/actions/workflows/ci.yml)
 # ChannelsDemo
 ```
 Using System.Threading.Channels
