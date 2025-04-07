@@ -1,10 +1,9 @@
-﻿namespace App
+﻿namespace App;
+
+public sealed record Settings
 {
-    public class Settings
-    {
-        public int ItemsNumber { get; set; }
-        public int ConsumerDelay { get; set; }
-        public int ProducerDelay { get; set; }
-        public int BoundedChannelSize { get; set; }
-    }
+    public int ItemsNumber { get; init; }
+    public int ConsumerDelay { get; init; }
+    public int ProducerDelay { get; init; }
+    public int BoundedChannelSize { get; init; }
 }

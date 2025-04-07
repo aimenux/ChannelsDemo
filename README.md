@@ -24,4 +24,4 @@ Using System.Threading.Channels
 > **(6)** Example6 : based on channel built-in implementation (bounded)
 >> Consumer using `ReadAllAsync` method
 
-**`Tools`** : vs19, net core 3.1
+**`Tools`** : net9.0
